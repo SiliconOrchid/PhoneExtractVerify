@@ -14,16 +14,11 @@ namespace PhoneExtractVerify.Api.Controllers
     [ApiController]
     public class PhoneReaderController : Controller
     {
-        private readonly IWordProcessingService _wordProcessingService;
-        private readonly ITwilioHelperService _twilioHelperService;
-        private readonly IAzureCognitionHelperService _azureCognitionHelperService;
+        private readonly IMediatorService _mediatorService;
 
-
-        public PhoneReaderController(IWordProcessingService wordProcessingService, ITwilioHelperService twilioHelperService, IAzureCognitionHelperService azureCognitionHelperService)
+        public PhoneReaderController(IMediatorService mediatorService)
         {
-            _wordProcessingService = wordProcessingService ?? throw new ArgumentNullException();
-            _twilioHelperService = twilioHelperService ?? throw new ArgumentNullException();
-            _azureCognitionHelperService = azureCognitionHelperService ?? throw new ArgumentNullException();
+            _mediatorService = mediatorService ?? throw new ArgumentNullException();
         }
 
 
@@ -38,26 +33,15 @@ namespace PhoneExtractVerify.Api.Controllers
                 imageBytes = ms.ToArray();
             }
 
-            // Call the Azure Computer Vision service (for OCR), returning a complex json object.
-            string jsonResponse = await _azureCognitionHelperService.ExtractPrintedText(imageBytes);
-            //string jsonResponse = await _azureCognitionHelperService.ReadHandwrittenText(imageBytes);
-
-            // Extract words from OCR response, discarding other information.
-            List<string> listAllWords = _azureCognitionHelperService.ExtractWords(jsonResponse);
-
-            // Filter raw list of words into a new list of candidate phone numbers.
-            List<string> listCandidatePhoneNumbers = _wordProcessingService
-                .AddWords(listAllWords)
-                .GetCandidatePhoneNumbers()
-                .ExtractWordsWithNumbers()
-                .ReformatAsUKInternational()
-                .GetMinLengthNumbers()
-                .ListProcessedWords;
-
-            // Call Twilio Lookup Api to verifying list of candidate phone numbers.
-            List<string> listVerifiedPhoneNumbers = await _twilioHelperService.ProcessListCandidateNumbersAsync(listCandidatePhoneNumbers);
-
-            return Ok(string.Join(" - ", listVerifiedPhoneNumbers));
+            try
+            { 
+                List<string> listVerifiedPhoneNumbers = await _mediatorService.ProcessPhoneNumber(imageBytes);
+                return Ok(string.Join(" - ", listVerifiedPhoneNumbers));
+            }
+            catch
+            {
+                return StatusCode(500);
+            }
         }
     }
 }
