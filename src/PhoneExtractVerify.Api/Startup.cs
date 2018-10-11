@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+
+using PhoneExtractVerify.Api.Models;
+using PhoneExtractVerify.Api.Services;
+using PhoneExtractVerify.Api.Services.Interface;
 
 namespace PhoneExtractVerify.Api
 {
@@ -25,6 +22,14 @@ namespace PhoneExtractVerify.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<TwilioCredentials>(Configuration.GetSection("TwilioAccount"));
+            services.Configure<AzureComputerVisionCredentials>(Configuration.GetSection("AzureComputerVisionCredentials"));
+
+            services.AddTransient<IWordProcessingService, WordProcessingService>();
+            services.AddTransient<ITwilioHelperService, TwilioHelperService>();
+            services.AddTransient<IAzureCognitionHelperService, AzureCognitionHelperService>();
+            services.AddTransient<IMediatorService, MediatorService>();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
