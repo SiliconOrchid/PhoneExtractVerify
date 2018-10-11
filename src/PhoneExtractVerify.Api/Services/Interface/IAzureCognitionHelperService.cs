@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PhoneExtractVerify.Api.Service.Interface
+namespace PhoneExtractVerify.Api.Services.Interface
 {
     public interface IAzureCognitionHelperService
     {

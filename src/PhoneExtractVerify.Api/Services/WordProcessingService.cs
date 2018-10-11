@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-using PhoneExtractVerify.Api.Service.Interface;
+using PhoneExtractVerify.Api.Services.Interface;
 
-namespace PhoneExtractVerify.Api.Service
+namespace PhoneExtractVerify.Api.Services
 {
     public class WordProcessingService : IWordProcessingService
     {

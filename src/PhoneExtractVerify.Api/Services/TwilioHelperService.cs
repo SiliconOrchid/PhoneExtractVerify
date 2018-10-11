@@ -8,9 +8,9 @@ using Twilio;
 using Twilio.Rest.Lookups.V1;
 
 using PhoneExtractVerify.Api.Models;
-using PhoneExtractVerify.Api.Service.Interface;
+using PhoneExtractVerify.Api.Services.Interface;
 
-namespace PhoneExtractVerify.Api.Service
+namespace PhoneExtractVerify.Api.Services
 {
     public class TwilioHelperService : ITwilioHelperService
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PhoneExtractVerify.Api.Service.Interface
+namespace PhoneExtractVerify.Api.Services.Interface
 {
     public interface IWordProcessingService
     {

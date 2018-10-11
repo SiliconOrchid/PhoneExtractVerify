@@ -9,9 +9,9 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
 using PhoneExtractVerify.Api.Models;
-using PhoneExtractVerify.Api.Service.Interface;
+using PhoneExtractVerify.Api.Services.Interface;
 
-namespace PhoneExtractVerify.Api.Service
+namespace PhoneExtractVerify.Api.Services
 {
     public class AzureCognitionHelperService : IAzureCognitionHelperService
     {
