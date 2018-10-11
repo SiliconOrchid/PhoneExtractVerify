@@ -42,22 +42,13 @@ namespace PhoneExtractVerify.Api.Services
 
             foreach (var taskResult in await Task.WhenAll(listTasks))
             {
-                listVerifiedNumbers.Add(taskResult);
+                if (!string.IsNullOrEmpty(taskResult))
+                {
+                    listVerifiedNumbers.Add(taskResult);
+                }
             }
 
-
-                //await Task.WhenAll();
-
-
-                //foreach (var candidatePhoneNumber in listCandidatePhoneNumbers)
-                //{
-                //    string resultFromTwilio = await VerifyWithTwilioAsync(candidatePhoneNumber);
-                //    if (!string.IsNullOrEmpty(resultFromTwilio))
-                //    {
-                //        listVerifiedNumbers.Add(resultFromTwilio);
-                //    }
-                //}
-                return listVerifiedNumbers;
+            return listVerifiedNumbers;
         }
 
         private async Task<string> VerifyWithTwilioAsync(string numberToTest)

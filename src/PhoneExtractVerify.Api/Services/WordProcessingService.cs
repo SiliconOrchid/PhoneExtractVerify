@@ -136,6 +136,7 @@ namespace PhoneExtractVerify.Api.Services
         #endregion
 
 
+        #region Private Method(s)
         /// <summary>
         /// Strip out non-numeric characters from string
         /// </summary>
@@ -145,6 +146,6 @@ namespace PhoneExtractVerify.Api.Services
         {
             return new string(input.Where(c => char.IsDigit(c)).ToArray());
         }
-
+        #endregion
     }
 }
