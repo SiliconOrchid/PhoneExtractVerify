@@ -13,11 +13,11 @@ using PhoneExtractVerify.Api.Services.Interface;
 
 namespace PhoneExtractVerify.Api.Services
 {
-    public class AzureCognitionHelperService : IAzureCognitionHelperService
+    public class AzureComputerVisionHelperService : IAzureComputerVisionHelperService
     {
         private AzureComputerVisionCredentials _azureComputerVisionCredentials;
 
-        public AzureCognitionHelperService(IOptions<AzureComputerVisionCredentials> azureComputerVisionCredentialsConfiguration)
+        public AzureComputerVisionHelperService(IOptions<AzureComputerVisionCredentials> azureComputerVisionCredentialsConfiguration)
         {
             _azureComputerVisionCredentials = azureComputerVisionCredentialsConfiguration.Value ?? throw new ArgumentException(nameof(azureComputerVisionCredentialsConfiguration));
         }

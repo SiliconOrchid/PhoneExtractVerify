@@ -11,23 +11,23 @@ namespace PhoneExtractVerify.Api.Services
     {
         private readonly IWordProcessingService _wordProcessingService;
         private readonly ITwilioHelperService _twilioHelperService;
-        private readonly IAzureCognitionHelperService _azureCognitionHelperService;
+        private readonly IAzureComputerVisionHelperService _azureComputerVisionHelperService;
 
-        public MediatorService(IWordProcessingService wordProcessingService, ITwilioHelperService twilioHelperService, IAzureCognitionHelperService azureCognitionHelperService)
+        public MediatorService(IWordProcessingService wordProcessingService, ITwilioHelperService twilioHelperService, IAzureComputerVisionHelperService azureComputerVisionHelperService)
         {
             _wordProcessingService = wordProcessingService ?? throw new ArgumentNullException();
             _twilioHelperService = twilioHelperService ?? throw new ArgumentNullException();
-            _azureCognitionHelperService = azureCognitionHelperService ?? throw new ArgumentNullException();
+            _azureComputerVisionHelperService = azureComputerVisionHelperService ?? throw new ArgumentNullException();
         }
 
         public async Task<List<string>> ProcessPhoneNumber(byte[] imageBytes)
         {
             // Call the Azure Computer Vision service (for OCR), returning a complex json object.
-            string jsonResponse = await _azureCognitionHelperService.ExtractPrintedText(imageBytes);
+            string jsonResponse = await _azureComputerVisionHelperService.ExtractPrintedText(imageBytes);
             //string jsonResponse = await _azureCognitionHelperService.ReadHandwrittenText(imageBytes);
 
             // Extract words from OCR response, discarding other information.
-            List<string> listAllWords = _azureCognitionHelperService.ExtractWords(jsonResponse);
+            List<string> listAllWords = _azureComputerVisionHelperService.ExtractWords(jsonResponse);
 
             // Filter raw list of words into a new list of candidate phone numbers.
             List<string> listCandidatePhoneNumbers = _wordProcessingService

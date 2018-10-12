@@ -27,7 +27,7 @@ namespace PhoneExtractVerify.Api
 
             services.AddTransient<IWordProcessingService, WordProcessingService>();
             services.AddTransient<ITwilioHelperService, TwilioHelperService>();
-            services.AddTransient<IAzureCognitionHelperService, AzureCognitionHelperService>();
+            services.AddTransient<IAzureComputerVisionHelperService, AzureComputerVisionHelperService>();
             services.AddTransient<IMediatorService, MediatorService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

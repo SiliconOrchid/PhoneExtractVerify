@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PhoneExtractVerify.Api.Services.Interface
 {
-    public interface IAzureCognitionHelperService
+    public interface IAzureComputerVisionHelperService
     {
         Task<string> ExtractPrintedText(byte[] imageBytes);
         Task<string> ReadHandwrittenText(byte[] imageBytes);
