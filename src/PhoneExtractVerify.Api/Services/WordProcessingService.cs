@@ -34,7 +34,6 @@ namespace PhoneExtractVerify.Api.Services
         #endregion
 
 
-
         #region Chaining Method(s)
 
         /// <summary>

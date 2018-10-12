@@ -51,6 +51,11 @@ namespace PhoneExtractVerify.Api.Services
             return listVerifiedNumbers;
         }
 
+        /// <summary>
+        /// Invokes Twilio client to test string provided as argument.   Checks for errors or problem responses, only returning values that are validated.
+        /// </summary>
+        /// <param name="numberToTest"></param>
+        /// <returns></returns>
         private async Task<string> VerifyWithTwilioAsync(string numberToTest)
         {
             try
@@ -74,8 +79,5 @@ namespace PhoneExtractVerify.Api.Services
                 return String.Empty;
             }
         }
-
-
-
     }
 }

@@ -39,13 +39,11 @@ namespace PhoneExtractVerify.Api.Services
                     response = await client.PostAsync(_azureComputerVisionCredentials.UriBase, content);
                 }
 
-                string contentString = await response.Content.ReadAsStringAsync();
-
-                return contentString;
+                return await response.Content.ReadAsStringAsync();
             }
             catch (Exception e)
             {
-                Console.WriteLine("\n" + e.Message);
+                Console.WriteLine(e.Message);
                 return "";
             }
         }
@@ -64,7 +62,6 @@ namespace PhoneExtractVerify.Api.Services
                 HttpResponseMessage response;
                 string operationLocation;
 
-
                 using (ByteArrayContent content = new ByteArrayContent(imageBytes))
                 {
                     content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
@@ -78,10 +75,9 @@ namespace PhoneExtractVerify.Api.Services
                 else
                 {
                     string errorString = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("\n\nResponse:\n{0}\n",JToken.Parse(errorString).ToString());
+                    Console.WriteLine($"ReadHandwrittenText : Response:{JToken.Parse(errorString).ToString()}");
                     return string.Empty;
                 }
-
 
                 string contentString;
                 int i = 0;
@@ -96,7 +92,7 @@ namespace PhoneExtractVerify.Api.Services
 
                 if (i == 10 && contentString.IndexOf("\"status\":\"Succeeded\"") == -1)
                 {
-                    Console.WriteLine("\nTimeout error.\n");
+                    Console.WriteLine("ReadHandwrittenText : Timeout error.");
                     return string.Empty;
                 }
 
