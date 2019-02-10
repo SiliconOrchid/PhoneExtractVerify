@@ -28,8 +28,8 @@ namespace PhoneExtractVerify.Api.Services
 
 
             // Call the Azure Computer Vision service (for Handwritten Text) and extract words from response.
-                //string jsonResponse = await _azureComputerVisionHelperService.RecogniseHandwrittenText(imageBytes);
-                //List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromHandwrittenResult(jsonResponse);
+            //string jsonResponse = await _azureComputerVisionHelperService.RecogniseHandwrittenText(imageBytes);
+            //List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromHandwrittenResult(jsonResponse);
 
 
 
