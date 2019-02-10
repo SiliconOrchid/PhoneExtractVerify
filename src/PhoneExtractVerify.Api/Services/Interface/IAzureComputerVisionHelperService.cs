@@ -5,9 +5,10 @@ namespace PhoneExtractVerify.Api.Services.Interface
 {
     public interface IAzureComputerVisionHelperService
     {
-        Task<string> ExtractPrintedText(byte[] imageBytes);
-        Task<string> ReadHandwrittenText(byte[] imageBytes);
+        Task<string> RecognisePrintedText(byte[] imageBytes);
+        Task<string> RecogniseHandwrittenText(byte[] imageBytes);
 
-        List<string> ExtractWords(string jsonResponse);
+        List<string> ExtractWordsFromPrintedResult(string jsonResponse);
+        List<string> ExtractWordsFromHandwrittenResult(string jsonResponse);
     }
 }

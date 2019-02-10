@@ -23,7 +23,7 @@ namespace PhoneExtractVerify.Api.Services
         }
 
 
-        public async Task<string> ExtractPrintedText(Byte[] imageBytes)
+        public async Task<string> RecognisePrintedText(Byte[] imageBytes)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace PhoneExtractVerify.Api.Services
                 using (ByteArrayContent content = new ByteArrayContent(imageBytes))
                 {
                     content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                    response = await client.PostAsync(_azureComputerVisionCredentials.UriBase, content);
+                    response = await client.PostAsync(_azureComputerVisionCredentials.UriBase_TypedOCR, content);
                 }
 
                 return await response.Content.ReadAsStringAsync();
@@ -50,14 +50,14 @@ namespace PhoneExtractVerify.Api.Services
 
 
 
-        public async Task<string> ReadHandwrittenText(Byte[] imageBytes)
+        public async Task<string> RecogniseHandwrittenText(Byte[] imageBytes)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", _azureComputerVisionCredentials.SubscriptionKey);
                 string requestParameters = "mode=Handwritten";
-                string uri = _azureComputerVisionCredentials.UriBase + "?" + requestParameters;
+                string uri = _azureComputerVisionCredentials.UriBase_HandwrittenOCR + "?" + requestParameters;
 
                 HttpResponseMessage response;
                 string operationLocation;
@@ -110,7 +110,7 @@ namespace PhoneExtractVerify.Api.Services
 
 
 
-        public List<string> ExtractWords(string jsonResponse)
+        public List<string> ExtractWordsFromPrintedResult(string jsonResponse)
         {
             List<string> listDistinctWords = new List<string>();
 
@@ -124,6 +124,24 @@ namespace PhoneExtractVerify.Api.Services
                     {
                         listDistinctWords.Add(Convert.ToString(word.text));
                     }
+                }
+            }
+
+            return listDistinctWords;
+        }
+
+
+        public List<string> ExtractWordsFromHandwrittenResult(string jsonResponse)
+        {
+            List<string> listDistinctWords = new List<string>();
+
+            dynamic jsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(jsonResponse);
+
+            foreach (var line in jsonObj.recognitionResult.lines)
+            {
+                foreach (var word in line.words)
+                {
+                    listDistinctWords.Add(Convert.ToString(word.text));
                 }
             }
 
