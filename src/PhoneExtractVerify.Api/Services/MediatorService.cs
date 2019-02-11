@@ -23,13 +23,13 @@ namespace PhoneExtractVerify.Api.Services
         public async Task<List<string>> ProcessPhoneNumber(byte[] imageBytes)
         {
             // Call the Azure Computer Vision service (for Printed Text) and extract words from response.
-            string jsonResponse = await _azureComputerVisionHelperService.RecognisePrintedText(imageBytes);
-            List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromPrintedResult(jsonResponse);
+            //string jsonResponse = await _azureComputerVisionHelperService.RecognisePrintedText(imageBytes);
+            //List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromPrintedResult(jsonResponse);
 
 
             // Call the Azure Computer Vision service (for Handwritten Text) and extract words from response.
-            //string jsonResponse = await _azureComputerVisionHelperService.RecogniseHandwrittenText(imageBytes);
-            //List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromHandwrittenResult(jsonResponse);
+            string jsonResponse = await _azureComputerVisionHelperService.RecogniseHandwrittenText(imageBytes);
+            List<string> listAllWords = _azureComputerVisionHelperService.ExtractWordsFromHandwrittenResult(jsonResponse);
 
 
 

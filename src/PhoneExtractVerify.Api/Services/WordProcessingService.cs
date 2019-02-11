@@ -51,7 +51,7 @@ namespace PhoneExtractVerify.Api.Services
             {
                 listCombinedNumberWords.Add(word);
 
-                if (word.Any(char.IsDigit) || word.Contains("+"))
+                if (word.Any(char.IsDigit) || word.Contains("+") || word.Contains("(") || word.Contains(")"))
                 {
 
                     if (IsTrailingNumber)
