@@ -4,12 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{DFB85808-5385-4657-943D-A346C797C601}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DemoResources", "DemoResources", "{20F39B31-F91E-4692-8E57-70C93DB522A3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2CFCDD61-98B9-4DF2-B31D-9B4674A85535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneExtractVerify.Api", "src\PhoneExtractVerify.Api\PhoneExtractVerify.Api.csproj", "{A12CBE6E-8572-4594-BDDF-2BD3584CE99D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneExtractVerify.Api", "src\PhoneExtractVerify.Api\PhoneExtractVerify.Api.csproj", "{A12CBE6E-8572-4594-BDDF-2BD3584CE99D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
